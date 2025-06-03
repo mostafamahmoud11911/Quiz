@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  INSTRUCTOR_ROUTES,
-  ROLES,
+
   Routes,
-  STUDENT_ROUTES,
+
 } from "./constants/constants";
-import { jwtVerify } from "jose";
+
 
 export const middleware = async (req: NextRequest) => {
   const path = req.nextUrl.pathname;
@@ -20,14 +19,16 @@ export const middleware = async (req: NextRequest) => {
     path === Routes.RESET_PASSWORD;
 
   if (authPath && token) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
 
 
-  if (!authPath && !token) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  if (!token && !authPath) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
+
+  
 
 
 

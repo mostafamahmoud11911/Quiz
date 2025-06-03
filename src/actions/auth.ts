@@ -2,7 +2,7 @@
 
 import axios, { AxiosError } from "axios";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+
 
 
 export const login = async (credentials: {
@@ -29,7 +29,7 @@ export const login = async (credentials: {
       message: data.message,
     };
 
-    
+
   } catch (error) {
     if (error instanceof AxiosError) {
       return {
